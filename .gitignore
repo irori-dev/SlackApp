@@ -76,3 +76,6 @@ typings/
 .fusebox/
 
 /dist/
+
+app.js
+app.js.map
