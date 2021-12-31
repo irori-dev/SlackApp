@@ -8,3 +8,6 @@ automatic_scaling:
   target_cpu_utilization: 0.95
   target_throughput_utilization: 0.95
   max_concurrent_requests: 80
+env_variables:
+  SLACK_BOT_TOKEN: "$SLACK_BOT_TOKEN"
+  SLACK_SIGNING_SECRET: "$SLACK_SIGNING_SECRET"
