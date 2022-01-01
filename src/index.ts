@@ -1,6 +1,7 @@
 import { app } from './initializers/bolt'
 import echo from './commands/echo'
 import getAllTasks from './commands/getAllTasks'
+import getMyTasks from './commands/getMyTasks'
 
 ;(async () => {
   // Start your app
@@ -11,3 +12,4 @@ import getAllTasks from './commands/getAllTasks'
 
 echo()
 getAllTasks()
+getMyTasks()
