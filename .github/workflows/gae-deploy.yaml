@@ -13,6 +13,7 @@ jobs:
         run: |
           sed -i -e 's/$SLACK_BOT_TOKEN/${{ secrets.SLACK_BOT_TOKEN }}/g' app.yaml
           sed -i -e 's/$SLACK_SIGNING_SECRET/${{ secrets.SLACK_SIGNING_SECRET }}/g' app.yaml
+          sed -i -e 's/$NOTION_API_TOKEN/${{ secrets.NOTION_API_TOKEN }}/g' app.yaml
       - name: Deploy to App Engine
         id: deploy
         uses: google-github-actions/deploy-appengine@v0.2.0
