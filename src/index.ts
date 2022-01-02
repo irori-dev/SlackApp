@@ -1,7 +1,8 @@
 import { app } from './initializers/bolt'
-import echo from './commands/echo'
+import ping from './commands/ping'
 import getAllTasks from './commands/getAllTasks'
 import getMyTasks from './commands/getMyTasks'
+import addBlogDb from './commands/addBlogDb'
 
 ;(async () => {
   // Start your app
@@ -10,6 +11,7 @@ import getMyTasks from './commands/getMyTasks'
   console.log(`⚡️ Bolt app is running! PORT: ${server.address().port}`)
 })()
 
-echo()
+ping()
 getAllTasks()
 getMyTasks()
+addBlogDb()

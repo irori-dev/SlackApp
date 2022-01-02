@@ -20,7 +20,7 @@ export default async (bodyParameters: object): Promise<Result[]> => {
   }
 
   try {
-    const result = await axios.post('https://api.notion.com/v1/databases/eae53f7e3bcf4835b353ddb77cd1ea34/query', bodyParameters, headers)
+    const result = await axios.post(`https://api.notion.com/v1/databases/${process.env.NOTION_TASK_DATABASE_ID}/query`, bodyParameters, headers)
     const array: Result[] = []
     result.data['results'].forEach((result: any) => {
       array.push(formatTaskResult(result))
