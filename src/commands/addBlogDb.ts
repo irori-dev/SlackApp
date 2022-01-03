@@ -14,7 +14,7 @@ export default (): void => {
           inclusive: true
         });
         const firstMessage = replies.messages.sort(function(a,b){a.ts-b.ts})[0]
-        const createdNotionId =  await createBlog(formattedBodyParameter(firstMessage))
+        const createdNotionId =  await createBlog(await formattedBodyParameter(firstMessage))
         await app.client.chat.postMessage({
           channel: message.channel,
           thread_ts: message.thread_ts,
@@ -29,7 +29,7 @@ export default (): void => {
   })
 }
 
-const formattedBodyParameter = (message):object => {
+const formattedBodyParameter = async (message): Promise<object> => {
   return {
     parent: {database_id: process.env.NOTION_BLOG_DATABASE_ID},
     properties: {
@@ -47,7 +47,7 @@ const formattedBodyParameter = (message):object => {
         people: [
           {
             object: 'user',
-            id: slackIdToNotionId(message.user)
+            id: await slackIdToNotionId(message.user)
           }
         ]
       }

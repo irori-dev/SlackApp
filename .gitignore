@@ -77,5 +77,4 @@ typings/
 
 /dist/
 
-app.js
-app.js.map
+serviceAccountKey.json

@@ -4,7 +4,7 @@ import { slackIdToNotionId } from '../functions/convertIds'
 
 export default (): void => {
   app.message(`irori get my tasks`, async ({ message, say }): Promise<void> => {
-    const userNotionId = slackIdToNotionId(message.user)
+    const userNotionId = await slackIdToNotionId(message.user)
     const taskTitles = await formattedText(userNotionId)
     
     await say(taskTitles)

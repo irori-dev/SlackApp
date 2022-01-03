@@ -10,13 +10,13 @@ interface Result {
   [key: string]: any
 }
 
-export default (result: JSON): Result => {
+export default async (result: JSON): Promise<Result> => {
   const regex = /[¥-]/g
   const url = `https://www.notion.so/${result['id'].replace(regex, '')}`
   const title = result['properties']['Name']['title'][0]['plain_text']
   const startsAt = result['properties']['Starts at']['date'] != null ? result['properties']['Starts at']['date']['start'] : '未記入'
   const endsAt = result['properties']['Ends at']['date'] != null ? result['properties']['Ends at']['date']['start'] : '未記入'
-  const assignee = getNames(result['properties']['Asignee']['people'])
+  const assignee = await getNames(result['properties']['Asignee']['people'])
   const status = result['properties']['status']['select'] != null ? result['properties']['status']['select']['name'] : '未設定'
 
   return {
@@ -29,11 +29,13 @@ export default (result: JSON): Result => {
   }
 }
 
-const getNames = (people: JSON[]): string => {
+const getNames = async (people: JSON[]): Promise<string> => {
   let mentions: string = ''
-  people.forEach((person) => {
-    mentions = `${mentions} <@${notionIdToSlackId(person['id'])}>`
-  })
+
+  for (const person of people) {
+    const slackId = await notionIdToSlackId(person['id'])
+    mentions = `${mentions} <@${slackId}>`
+  }
   return mentions
 }
 
