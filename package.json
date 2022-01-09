@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@octokit/rest": "^18.12.0",
     "@slack/bolt": "^3.8.1",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",

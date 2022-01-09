@@ -3,6 +3,7 @@ import ping from './commands/ping'
 import getAllTasks from './commands/getAllTasks'
 import getMyTasks from './commands/getMyTasks'
 import addBlogDb from './commands/addBlogDb'
+import deploySlackApp from './commands/deploySlackApp'
 
 ;(async () => {
   // Start your app
@@ -15,3 +16,4 @@ ping()
 getAllTasks()
 getMyTasks()
 addBlogDb()
+deploySlackApp()
