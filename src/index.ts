@@ -4,6 +4,7 @@ import getAllTasks from './commands/getAllTasks'
 import getMyTasks from './commands/getMyTasks'
 import addBlogDb from './commands/addBlogDb'
 import deploySlackApp from './commands/deploySlackApp'
+import addTweet from './commands/addTweet'
 
 ;(async () => {
   // Start your app
@@ -17,3 +18,4 @@ getAllTasks()
 getMyTasks()
 addBlogDb()
 deploySlackApp()
+addTweet()
