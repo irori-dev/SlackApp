@@ -14,8 +14,6 @@ jobs:
           sed -i -e 's/$SLACK_BOT_TOKEN/${{ secrets.SLACK_BOT_TOKEN }}/g' app.yaml
           sed -i -e 's/$SLACK_SIGNING_SECRET/${{ secrets.SLACK_SIGNING_SECRET }}/g' app.yaml
           sed -i -e 's/$NOTION_API_TOKEN/${{ secrets.NOTION_API_TOKEN }}/g' app.yaml
-          sed -i -e 's/$NOTION_TASK_DATABASE_ID/${{ secrets.NOTION_TASK_DATABASE_ID }}/g' app.yaml
-          sed -i -e 's/$NOTION_BLOG_DATABASE_ID/${{ secrets.NOTION_BLOG_DATABASE_ID }}/g' app.yaml
           sed -i -e 's/$GH_TOKEN/${{ secrets.GH_TOKEN }}/g' app.yaml
           sed -i -e 's/$TWITTER_API_KEY/${{ secrets.TWITTER_API_KEY }}/g' app.yaml
           sed -i -e 's/$TWITTER_API_SECRET/${{ secrets.TWITTER_API_SECRET }}/g' app.yaml

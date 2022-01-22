@@ -1,5 +1,6 @@
 import axios from 'axios'
 import formatTaskResult from './formatTaskResult'
+import fetchNotionDbId from './fetchNotionDbId'
 
 interface Result {
   url: string
@@ -12,6 +13,7 @@ interface Result {
 }
 
 export default async (bodyParameters: object): Promise<Result[]> => {
+  const tasksDbId = await fetchNotionDbId('Tasks')
   const headers = {
     headers: { 
       Authorization: `Bearer ${process.env.NOTION_API_TOKEN}`,
@@ -20,7 +22,7 @@ export default async (bodyParameters: object): Promise<Result[]> => {
   }
 
   try {
-    const results = await axios.post(`https://api.notion.com/v1/databases/${process.env.NOTION_TASK_DATABASE_ID}/query`, bodyParameters, headers)
+    const results = await axios.post(`https://api.notion.com/v1/databases/${tasksDbId}/query`, bodyParameters, headers)
     const array: Result[] = []
     for (const result of results.data['results']) {
       array.push(await formatTaskResult(result))

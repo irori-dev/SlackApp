@@ -1,6 +1,7 @@
 import { app } from '../initializers/bolt'
 import { slackIdToNotionId } from '../functions/convertIds'
 import createBlog from '../functions/createBlog'
+import fetchNotionDbId from '../functions/fetchNotionDbId'
 
 const regex = /[¥-]/g
 
@@ -30,8 +31,9 @@ export default (): void => {
 }
 
 const formattedBodyParameter = async (message): Promise<object> => {
+  const blogsDbId = await fetchNotionDbId('Blogs')
   return {
-    parent: {database_id: process.env.NOTION_BLOG_DATABASE_ID},
+    parent: {database_id: blogsDbId},
     properties: {
       Title: {
         title: [
