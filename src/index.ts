@@ -5,6 +5,8 @@ import getMyTasks from './commands/getMyTasks'
 import addBlogDb from './commands/addBlogDb'
 import deploySlackApp from './commands/deploySlackApp'
 import addTweet from './commands/addTweet'
+import notify from './requests/notify'
+import daily_reports from './requests/daily_reports'
 
 ;(async () => {
   // Start your app
@@ -19,3 +21,5 @@ getMyTasks()
 addBlogDb()
 deploySlackApp()
 addTweet()
+notify()
+daily_reports()

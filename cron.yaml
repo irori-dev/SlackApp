@@ -1,0 +1,5 @@
+cron:
+  - description: create daily_reports
+    url: /slack/daily_reports
+    schedule: every day 18:00
+    timezone: Asia/Tokyo
