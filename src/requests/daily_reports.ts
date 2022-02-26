@@ -1,5 +1,6 @@
 import fetchNotionUserId from '../functions/fetchNotionUserId'
 import fetchNotionDbId from '../functions/fetchNotionDbId'
+import fetchSlackId from '../functions/fetchSlackId'
 import createBlog from '../functions/createBlog'
 import { app } from '../initializers/bolt'
 
@@ -14,7 +15,7 @@ export default (): void => {
     const params = await formattedBodyParameter(targetUsersNotionIds[0])
     const createdNotionId =  await createBlog(params)
     await app.client.chat.postMessage({
-      channel: `C02T2ALTPDE`,
+      channel: await fetchSlackId('002-daily_reports'),
       text: `created!:tada: See <https://www.notion.so/${createdNotionId?.replace(regex, '')}|here>`
     })
   })
