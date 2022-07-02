@@ -26,6 +26,7 @@ jobs:
           deliverables: app.yaml
           project_id: ${{ secrets.GCP_PROJECT }}
           credentials: ${{ secrets.GCP_SA_KEY }}
+          version: v1
       - name: Notify deployment
         uses: 8398a7/action-slack@v3.8.0
         with:
