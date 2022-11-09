@@ -1,9 +1,8 @@
-import { firestore } from '../initializers/firestore'
+const yaml = require('js-yaml');
+const fs   = require('fs');
 
 export default async (name: string): Promise<string> => {
-  const targetNotionDbRef = await firestore.collection('users').where('name', '==', name).get()
-  const targetNotionDb = await targetNotionDbRef.docs.map(doc => {
-    return doc.data()
-  })[0]
-  return targetNotionDb.notion_id
+  const users = yaml.load(fs.readFileSync('./data/users.yaml', 'utf8'));
+  const targetUser = users.find((user) => user.name === name)
+  return targetUser.notionId
 }

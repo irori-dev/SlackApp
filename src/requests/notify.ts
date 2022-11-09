@@ -7,8 +7,8 @@ export default function() {
 
     const msg = {
       token: process.env.SLACK_BOT_TOKEN,
-      text: `<!channel>\nお知らせです`,
-      channel: await fetchSlackId('002-daily_reports')
+      text: `/slack/notify にアクセスがありました`,
+      channel: await fetchSlackId('_test')
     }
     return app.client.chat.postMessage(msg)
   })

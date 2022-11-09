@@ -1,9 +1,8 @@
-import { firestore } from '../initializers/firestore'
+const yaml = require('js-yaml');
+const fs   = require('fs');
 
 export default async (name: string): Promise<string> => {
-  const targetSlackDbRef = await firestore.collection('slack').where('name', '==', name).get()
-  const targetSlackDb = await targetSlackDbRef.docs.map(doc => {
-    return doc.data()
-  })[0]
-  return targetSlackDb.slack_id
+  const channels = yaml.load(fs.readFileSync('./data/slack.yaml', 'utf8'));
+  const targetChannel = channels.find((channel: any) => channel.name === name)
+  return targetChannel.id
 }
