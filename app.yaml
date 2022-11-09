@@ -1,6 +1,5 @@
 runtime: nodejs16
 instance_class: F1
-service_account: "$GCP_SERVICE_ACCOUNT"
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: 1
