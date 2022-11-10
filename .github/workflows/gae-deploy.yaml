@@ -51,10 +51,10 @@ jobs:
           version: v1
       - name: Update Slack message with deployment status
         uses: slackapi/slack-github-action@v1.23.0
-        update-ts: ${{ steps.slack.outputs.ts }}
         if: always()
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          update-ts: ${{ steps.slack.outputs.ts }}
           payload: |
             {
               "text": "SlackApp Deployment finished",
