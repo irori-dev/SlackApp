@@ -68,7 +68,7 @@ jobs:
                     {
                       "title": "Status",
                       "short": true,
-                      "value": 'Failed'
+                      "value": "Failed"
                     }
                   ]
                 }
@@ -93,7 +93,7 @@ jobs:
                     {
                       "title": "Status",
                       "short": true,
-                      "value": 'Success'
+                      "value": "Success"
                     }
                   ]
                 }
