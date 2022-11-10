@@ -9,9 +9,13 @@ const regex = /[¥-]/g
 export default function() {
   app.receiver.app.use(bodyParser.urlencoded({ extended: true }))
   app.receiver.app.use(bodyParser.json())
-  app.receiver.app.use(cors())
+  app.receiver.app.use(cors({
+    origin: process.env.CORPORATE_SITE_URL,
+    credentials: true,
+    optionsSuccessStatus: 201
+  }))
   app.receiver.app.post(`/slack/contact`, async (req, res) => {
-    res.sendStatus(200)
+    res.sendStatus(201)
 
     const createdNotionId =  await createNotionPost(await bodyParameter(req.body))
 
