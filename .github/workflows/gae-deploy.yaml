@@ -49,49 +49,25 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT }}
           credentials: ${{ secrets.GCP_SA_KEY }}
           version: v1
-      - name: Update Slack message if deployment succeeded
-        if: steps.deploy.outcome == 'success'
+      - name: Update Slack message with deployment status
         uses: slackapi/slack-github-action@v1.23.0
+        update-ts: ${{ steps.slack.outputs.ts }}
+        if: always()
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           payload: |
             {
-              "text": "SlackApp Deployment successfully finished",
+              "text": "SlackApp Deployment finished",
               "attachments": [
                 {
                   "pretext": "Deployment finished",
-                  "color": "28a745",
+                  "color": "${{ steps.deploy.outputs.deploy-status }}",
                   "fields": [
                     {
                       "title": "Status",
                       "short": true,
-                      "value": "Completed"
+                      "value": "${{ steps.deploy.outputs.deploy-status }}"
                     }
                   ]
                 }
               ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-      - name: Update Slack message if deployment failed
-        if: steps.deploy.outcome == 'failure'
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
-          payload: |
-            {
-              "text": "SlackApp Deployment failed",
-              "attachments": [
-                {
-                  "pretext": "Deployment failed",
-                  "color": "dc3545",
-                  "fields": [
-                    {
-                      "title": "Status",
-                      "short": true,
-                      "value": "Failed"
-                    }
-                  ]
-                }
-              ]
-            }
