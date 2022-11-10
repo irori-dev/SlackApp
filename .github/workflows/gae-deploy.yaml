@@ -10,6 +10,8 @@ jobs:
         uses: actions/checkout@v2
       - id: slack
         uses: slackapi/slack-github-action@v1.23.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           payload: |
@@ -29,8 +31,6 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
       - name: Replace credentials in app.yaml
         run: |
           sed -i -e 's/$SLACK_BOT_TOKEN/${{ secrets.SLACK_BOT_TOKEN }}/g' app.yaml
@@ -52,6 +52,8 @@ jobs:
       - name: Update Slack message with deployment status
         uses: slackapi/slack-github-action@v1.23.0
         if: always()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           update-ts: ${{ steps.slack.outputs.ts }}
