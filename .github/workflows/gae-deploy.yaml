@@ -49,13 +49,14 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT }}
           credentials: ${{ secrets.GCP_SA_KEY }}
           version: v1
-      - name: Send GitHub Action trigger data to Slack workflow
+      - name: Update Slack message if deployment succeeded
+        if: steps.deploy.outcome == 'success'
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           payload: |
             {
-              "text": "SlackApp Deployment finished (Completed)",
+              "text": "SlackApp Deployment successfully finished",
               "attachments": [
                 {
                   "pretext": "Deployment finished",
@@ -72,3 +73,25 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Update Slack message if deployment failed
+        if: steps.deploy.outcome == 'failure'
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          payload: |
+            {
+              "text": "SlackApp Deployment failed",
+              "attachments": [
+                {
+                  "pretext": "Deployment failed",
+                  "color": "dc3545",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": "Failed"
+                    }
+                  ]
+                }
+              ]
+            }
