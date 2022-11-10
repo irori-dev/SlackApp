@@ -50,7 +50,6 @@ jobs:
           credentials: ${{ secrets.GCP_SA_KEY }}
           version: v1
       - name: Send GitHub Action trigger data to Slack workflow
-        id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
