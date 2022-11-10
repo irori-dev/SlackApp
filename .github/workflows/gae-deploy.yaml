@@ -49,9 +49,9 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT }}
           credentials: ${{ secrets.GCP_SA_KEY }}
           version: v1
-      - name: Update Slack message with deployment status
+      - name: Update Slack message if deployment is failed
+        if: failure()
         uses: slackapi/slack-github-action@v1.23.0
-        if: always()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
         with:
@@ -59,17 +59,43 @@ jobs:
           update-ts: ${{ steps.slack.outputs.ts }}
           payload: |
             {
-              "text": "SlackApp Deployment finished",
+              "text": "SlackApp Deployment failed",
               "attachments": [
                 {
                   "pretext": "Deployment finished",
-                  "color": "${{ (success() && '28a745' ) || 'dc3545' }}",
+                  "color": "dc3545",
                   "fields": [
                     {
                       "title": "Status",
                       "short": true,
-                      "value": "${{ (success() && 'Success' ) || 'Failed' }}"
+                      "value": 'Failed'
                     }
                   ]
                 }
               ]
+            }
+      - name: Update Slack message if deployment is successful
+        if: success()
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN}}
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          update-ts: ${{ steps.slack.outputs.ts }}
+          payload: |
+            {
+              "text": "SlackApp Deployment succeeded",
+              "attachments": [
+                {
+                  "pretext": "Deployment finished",
+                  "color": "28a745",
+                  "fields": [
+                    {
+                      "title": "Status",
+                      "short": true,
+                      "value": 'Success'
+                    }
+                  ]
+                }
+              ]
+            }
