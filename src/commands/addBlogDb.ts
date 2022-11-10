@@ -1,6 +1,6 @@
 import { app } from '../initializers/bolt'
 import { slackIdToNotionId } from '../functions/convertIds'
-import createBlog from '../functions/createBlog'
+import createNotionPost from '../functions/createNotionPost'
 import fetchNotionDbId from '../functions/fetchNotionDbId'
 
 const regex = /[¥-]/g
@@ -15,7 +15,7 @@ export default (): void => {
           inclusive: true
         });
         const firstMessage = replies.messages.sort(function(a,b){a.ts-b.ts})[0]
-        const createdNotionId =  await createBlog(await formattedBodyParameter(firstMessage))
+        const createdNotionId =  await createNotionPost(await formattedBodyParameter(firstMessage))
         await app.client.chat.postMessage({
           channel: message.channel,
           thread_ts: message.thread_ts,

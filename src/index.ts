@@ -6,7 +6,7 @@ import addBlogDb from './commands/addBlogDb'
 import deploySlackApp from './commands/deploySlackApp'
 import addTweet from './commands/addTweet'
 import notify from './requests/notify'
-import daily_reports from './requests/daily_reports'
+import contact from './requests/contact'
 
 ;(async () => {
   // Start your app
@@ -22,4 +22,4 @@ addBlogDb()
 deploySlackApp()
 addTweet()
 notify()
-daily_reports()
+contact()
