@@ -20,7 +20,7 @@ jobs:
               "attachments": [
                 {
                   "pretext": "Deployment started",
-                  "color": "dbab09",
+                  "color": "ffc107",
                   "fields": [
                     {
                       "title": "Status",
@@ -63,12 +63,12 @@ jobs:
               "attachments": [
                 {
                   "pretext": "Deployment finished",
-                  "color": "${{ steps.deploy.outputs.deploy-status }}",
+                  "color": "${{ (success() && '28a745' ) || 'dc3545' }}",
                   "fields": [
                     {
                       "title": "Status",
                       "short": true,
-                      "value": "${{ steps.deploy.outputs.deploy-status }}"
+                      "value": "${{ (success() && 'Success' ) || 'Failed' }}"
                     }
                   ]
                 }
