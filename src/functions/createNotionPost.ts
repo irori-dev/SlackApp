@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default async (bodyParameters: object): Promise<string | undefined> => {
   const headers = {
-    headers: { 
+    headers: {
       Authorization: `Bearer ${process.env.NOTION_API_TOKEN}`,
       'Notion-Version': '2022-06-28'
     }
