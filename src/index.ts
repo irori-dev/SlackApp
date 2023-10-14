@@ -7,6 +7,7 @@ import deploySlackApp from './commands/deploySlackApp'
 import addTweet from './commands/addTweet'
 import notify from './requests/notify'
 import contact from './requests/contact'
+import uchirecoInquiry from './requests/uchireco/inquiry'
 
 ;(async () => {
   // Start your app
@@ -23,3 +24,4 @@ deploySlackApp()
 addTweet()
 notify()
 contact()
+uchirecoInquiry()
