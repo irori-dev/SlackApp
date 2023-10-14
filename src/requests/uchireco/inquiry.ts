@@ -10,7 +10,7 @@ export default function() {
   app.receiver.app.use(bodyParser.urlencoded({ extended: true }))
   app.receiver.app.use(bodyParser.json())
   app.receiver.app.use(cors({
-    origin: process.env.CORPORATE_SITE_URL,
+    origin: process.env.UCHIRECO_SITE_URL,
     credentials: true,
     optionsSuccessStatus: 201
   }))
