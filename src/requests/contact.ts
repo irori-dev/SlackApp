@@ -2,7 +2,6 @@ import { app } from '../initializers/bolt'
 import fetchSlackId from '../functions/fetchSlackId'
 import fetchNotionDbId from '../functions/fetchNotionDbId'
 import createNotionPost from '../functions/createNotionPost'
-import corsOptions from '../functions/corsOptions'
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const regex = /[¥-]/g
@@ -10,7 +9,11 @@ const regex = /[¥-]/g
 export default function() {
   app.receiver.app.use(bodyParser.urlencoded({ extended: true }))
   app.receiver.app.use(bodyParser.json())
-  app.receiver.app.use(cors(corsOptions))
+  app.receiver.app.use(cors({
+    origin: process.env.CORPORATE_SITE_URL,
+    credentials: true,
+    optionsSuccessStatus: 201
+  }))
   app.receiver.app.post(`/slack/contact`, async (req, res) => {
     res.sendStatus(201)
 
