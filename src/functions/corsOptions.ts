@@ -7,8 +7,6 @@ export default () => {
       } else {
         callback(new Error('Not allowed by CORS'))
       }
-    },
-    credentials: true,
-    optionsSuccessStatus: 201
+    }
   }
 }
