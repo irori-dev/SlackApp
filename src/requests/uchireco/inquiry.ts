@@ -3,17 +3,13 @@ import fetchSlackId from '../../functions/fetchSlackId'
 import fetchNotionDbId from '../../functions/fetchNotionDbId'
 import createNotionPost from '../../functions/createNotionPost'
 const bodyParser = require('body-parser')
-const cors = require('cors');
+// const cors = require('cors');
 const regex = /[¥-]/g
 
 export default function() {
   app.receiver.app.use(bodyParser.urlencoded({ extended: true }))
   app.receiver.app.use(bodyParser.json())
-  app.receiver.app.post(`/slack/uchireco/inquiry`, cors({
-    origin: process.env.UCHIRECO_SITE_URL,
-    credentials: true,
-    optionsSuccessStatus: 201
-  }), async (req, res) => {
+  app.receiver.app.post(`/slack/uchireco/inquiry`, async (req, res) => {
     res.sendStatus(201)
 
     const createdNotionId =  await createNotionPost(await bodyParameter(req.body))
