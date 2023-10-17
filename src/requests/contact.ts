@@ -13,7 +13,7 @@ export default function() {
     origin: process.env.CORPORATE_SITE_URL,
     credentials: true,
     optionsSuccessStatus: 201
-  }, async (req, res) => {
+  }), async (req, res) => {
     res.sendStatus(201)
 
     const createdNotionId =  await createNotionPost(await bodyParameter(req.body))
