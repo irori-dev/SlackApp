@@ -14,4 +14,3 @@ const config = {
 }
 
 export const app = new App(config)
-
